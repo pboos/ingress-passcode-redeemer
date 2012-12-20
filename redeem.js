@@ -14,13 +14,22 @@ casper.then(function() {
 
 casper.then(function() {
     var passcode = casper.cli.args[0];
-    this.echo('Redeeming passcode: '+ passcode);
+    this.echo('Redeeming passcode: ' + passcode);
     this.evaluate(function() {
         document.querySelector('.form_input#passcode').value = passcode;
         redeem();
     });
     this.wait(10 * 1000, function() {
-        result = this.evaluate(function() { return document.querySelector('#redeem_error').innerText;});
+        result = this.evaluate(function() {
+            var reward = document.querySelector('#redeemed_rewards');
+            var error = document.querySelector('#redeem_error');
+            if (reward && reward.innerText && reward.innerText !== '') {
+                 return reward.innerText;
+            } else if (error && error.innerText && error.innerText != '') {
+                return error.innerText;
+            }
+            return 'No value found...';
+        });
     });
 });
 
