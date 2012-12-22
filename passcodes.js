@@ -12,7 +12,7 @@ function hasBeenHandled(passcode) {
 }
 
 var options = {
-  host: 'decodeingress.wordpress.com',
+  host: 'decodeingress.me',
   port: '80',
   path: '/category/code/feed/',
   method: 'GET'
