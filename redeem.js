@@ -3,6 +3,7 @@ var result;
 casper.once("page.error", function onError(msg, trace) {
   console.log("Error: " + msg);
 });
+
 casper.start('http://www.ingress.com/intel', function() {
     this.echo('Clicking on Login');
     this.click('a');
@@ -14,6 +15,11 @@ casper.then(function() {
     this.echo('Logging in...');
     this.fill('form#gaia_loginform', { 'Email': email, 'Passwd': password }, true);
 });
+
+//casper.then(function() {
+//   casper.debugHTML();
+//   this.fill('form#challengeform', { 'challengetype': 'PhoneVerificationChallenge', 'phoneNumber': '0123456789' }, true);
+//});
 
 casper.then(function() {
     var passcode = casper.cli.args[0];
